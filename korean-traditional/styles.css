@@ -873,6 +873,7 @@ a {
 }
 
 .calendar__day.is-today {
+  position: relative; z-index: 1;
   font-weight: 800;
   color: var(--color-white);
 }
@@ -887,7 +888,7 @@ a {
   height: 2rem;
   border-radius: 50%;
   background: var(--color-crimson);
-  z-index: -1;
+  z-index: 0;
 }
 
 .calendar-actions {

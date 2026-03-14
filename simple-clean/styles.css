@@ -639,8 +639,9 @@ a {
 }
 
 .calendar__day.is-today {
+  position: relative; z-index: 1;
   font-weight: 500;
-  color: var(--color-text);
+  color: #fff;
 }
 
 .calendar__day.is-today::before {
@@ -652,8 +653,8 @@ a {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  border: 1px solid var(--color-text);
-  z-index: -1;
+  background: var(--color-text);
+  z-index: 0;
 }
 
 .calendar-actions {

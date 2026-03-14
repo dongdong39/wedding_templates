@@ -715,6 +715,7 @@ a {
 }
 
 .calendar__day.is-today {
+  position: relative; z-index: 1;
   font-weight: 600;
   color: var(--color-bg);
 }
@@ -729,7 +730,7 @@ a {
   height: 2rem;
   border-radius: 50%;
   background: var(--gradient-gold);
-  z-index: -1;
+  z-index: 0;
 }
 
 .calendar-actions {
