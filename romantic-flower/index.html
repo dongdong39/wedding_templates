@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- OG Meta (동적으로 config에서 채워짐) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" id="og-title" content="" />
+  <meta property="og:description" id="og-description" content="" />
+  <meta property="og:image" id="og-image" content="" />
+
+  <title id="page-title">모바일 청첩장</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@200;300;400;500;600&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ========== Curtain / Veil Opening ========== -->
+  <div class="curtain" id="curtain">
+    <div class="curtain__left"></div>
+    <div class="curtain__right"></div>
+    <div class="curtain__content">
+      <p class="curtain__names" id="curtain-names"></p>
+      <p class="curtain__msg">결혼합니다</p>
+      <button class="curtain__btn" id="curtain-open">초대장 열기</button>
+    </div>
+  </div>
+
+  <!-- ========== Falling Petals Canvas ========== -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- ========== Toast ========== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ========== Main ========== -->
+  <main class="invitation">
+
+    <!-- ── Hero Section ── -->
+    <section class="section hero" id="hero">
+      <div class="floral-frame">
+        <div class="hero__photo-wrap">
+          <img id="hero-img" src="" alt="웨딩 사진" loading="lazy" />
+        </div>
+      </div>
+      <div class="hero__info anim-target">
+        <p class="hero__label script-font">Wedding Day</p>
+        <h1 class="hero__names" id="hero-names"></h1>
+        <p class="hero__date" id="hero-date"></p>
+        <p class="hero__venue" id="hero-venue"></p>
+      </div>
+      <!-- Countdown -->
+      <div class="countdown anim-target" id="countdown">
+        <div class="countdown__item">
+          <span class="countdown__num" id="cd-days">0</span>
+          <span class="countdown__label">DAYS</span>
+        </div>
+        <div class="countdown__item">
+          <span class="countdown__num" id="cd-hours">0</span>
+          <span class="countdown__label">HOURS</span>
+        </div>
+        <div class="countdown__item">
+          <span class="countdown__num" id="cd-minutes">0</span>
+          <span class="countdown__label">MIN</span>
+        </div>
+        <div class="countdown__item">
+          <span class="countdown__num" id="cd-seconds">0</span>
+          <span class="countdown__label">SEC</span>
+        </div>
+      </div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Greeting Section ── -->
+    <section class="section greeting" id="greeting">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font" id="greeting-title"></h2>
+        <p class="greeting__text" id="greeting-text"></p>
+        <div class="greeting__parents" id="greeting-parents"></div>
+      </div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Calendar Section ── -->
+    <section class="section calendar-section" id="calendar-section">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font">Wedding Day</h2>
+        <div class="calendar" id="calendar"></div>
+        <div class="calendar-buttons">
+          <button class="btn btn--outline" id="btn-google-cal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Google 캘린더
+          </button>
+          <button class="btn btn--outline" id="btn-ics-cal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Apple 캘린더
+          </button>
+        </div>
+      </div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Our Story ── -->
+    <section class="section story" id="story">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font" id="story-title"></h2>
+        <p class="story__text" id="story-text"></p>
+      </div>
+      <div class="story__images" id="story-images"></div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Gallery ── -->
+    <section class="section gallery" id="gallery">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font">Gallery</h2>
+      </div>
+      <div class="gallery__grid" id="gallery-grid"></div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Location ── -->
+    <section class="section location" id="location">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font">Location</h2>
+        <p class="location__venue" id="loc-venue"></p>
+        <p class="location__hall" id="loc-hall"></p>
+        <p class="location__address" id="loc-address"></p>
+        <p class="location__tel" id="loc-tel"></p>
+        <div class="location__map-wrap">
+          <img id="loc-map-img" src="" alt="오시는 길" loading="lazy" />
+        </div>
+        <div class="location__buttons">
+          <button class="btn btn--rose" id="btn-copy-address">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            주소 복사
+          </button>
+          <a class="btn btn--outline" id="btn-kakao-map" href="" target="_blank" rel="noopener">
+            카카오맵
+          </a>
+          <a class="btn btn--outline" id="btn-naver-map" href="" target="_blank" rel="noopener">
+            네이버 지도
+          </a>
+        </div>
+      </div>
+      <div class="floral-divider"></div>
+    </section>
+
+    <!-- ── Account (축의금) ── -->
+    <section class="section account" id="account">
+      <div class="section__inner anim-target">
+        <h2 class="section__title script-font">Celebration</h2>
+        <p class="account__subtitle">축하의 마음을 전해주세요</p>
+
+        <!-- 신랑측 -->
+        <div class="accordion" id="acc-groom">
+          <button class="accordion__toggle" data-target="acc-groom-body">
+            <span>신랑측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__body" id="acc-groom-body"></div>
+        </div>
+
+        <!-- 신부측 -->
+        <div class="accordion" id="acc-bride">
+          <button class="accordion__toggle" data-target="acc-bride-body">
+            <span>신부측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__body" id="acc-bride-body"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer class="footer">
+      <p class="footer__text script-font">Thank you</p>
+    </footer>
+
+  </main>
+
+  <!-- ========== Photo Viewer Modal ========== -->
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <div class="viewer__backdrop"></div>
+    <button class="viewer__close" id="viewer-close" aria-label="닫기">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="viewer__counter" id="viewer-counter"></div>
+    <div class="viewer__track" id="viewer-track"></div>
+    <button class="viewer__nav viewer__nav--prev" id="viewer-prev" aria-label="이전">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="viewer__nav viewer__nav--next" id="viewer-next" aria-label="다음">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

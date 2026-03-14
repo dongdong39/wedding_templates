@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Meta / OG tags - config.js 값으로 script에서 동적 설정 -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+  <meta name="description" content="">
+
+  <title>Wedding Invitation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+</head>
+<body>
+
+  <!-- ═══ 웨딩 커튼 인트로 ═══ -->
+  <div class="curtain-overlay" id="curtainOverlay">
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+  </div>
+
+  <!-- ═══ 토스트 알림 ═══ -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- ═══ 사진 뷰어 모달 ═══ -->
+  <div class="photo-viewer" id="photoViewer" role="dialog" aria-modal="true" aria-label="사진 보기">
+    <button class="viewer-close" id="viewerClose" aria-label="닫기">&times;</button>
+    <button class="viewer-nav viewer-prev" id="viewerPrev" aria-label="이전 사진">&#10094;</button>
+    <button class="viewer-nav viewer-next" id="viewerNext" aria-label="다음 사진">&#10095;</button>
+    <div class="viewer-content" id="viewerContent">
+      <div class="viewer-loading" id="viewerLoading"></div>
+      <img src="" alt="확대 이미지" id="viewerImage">
+    </div>
+    <div class="viewer-counter">
+      <span id="currentIndex">1</span> / <span id="totalCount">0</span>
+    </div>
+  </div>
+
+  <!-- ═══ 메인 콘텐츠 ═══ -->
+  <main class="main-container">
+
+    <!-- ─── 첫번째 섹션: 메인 웨딩 사진 ─── -->
+    <section class="section section-hero">
+      <div class="hero-image-container">
+        <img src="" alt="웨딩 메인 사진" class="hero-image" id="heroImage">
+      </div>
+      <div class="hero-text">
+        <p class="wedding-date" id="heroDate"></p>
+        <h1 class="couple-names" id="heroNames"></h1>
+        <div class="parents-info" id="heroParents"></div>
+        <p class="venue" id="heroVenue"></p>
+
+        <div class="countdown-container">
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-days">0</span>
+            <span class="countdown-label">일</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-hours">0</span>
+            <span class="countdown-label">시간</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-minutes">0</span>
+            <span class="countdown-label">분</span>
+          </div>
+          <div class="countdown-separator">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="countdown-seconds">0</span>
+            <span class="countdown-label">초</span>
+          </div>
+        </div>
+
+        <div class="calendar-buttons">
+          <a href="#" class="calendar-btn google-cal" id="googleCalBtn" target="_blank" rel="noopener">구글 캘린더</a>
+          <button class="calendar-btn apple-cal" id="icsDownloadBtn">애플 캘린더</button>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ─── 두번째 섹션: 스토리 ─── -->
+    <section class="section section-story" id="storySection">
+      <div class="story-photos" id="storyPhotos"></div>
+      <div class="story-text">
+        <h2 id="storyTitle"></h2>
+        <p id="storyContent"></p>
+      </div>
+      <div class="story-photos story-photos-bottom" id="storyPhotosBottom"></div>
+    </section>
+
+    <!-- ─── 세번째 섹션: 갤러리 ─── -->
+    <section class="section section-gallery" id="gallerySection">
+      <h2 class="gallery-title">갤러리</h2>
+      <p class="gallery-subtitle">사진을 클릭하시면 크게 보실 수 있습니다</p>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ─── 네번째 섹션: 오시는 길 ─── -->
+    <section class="section section-location">
+      <h2 class="location-title">오시는 길</h2>
+      <div class="location-info">
+        <p class="location-name" id="locationVenue"></p>
+        <p class="location-address" id="locationAddress"></p>
+        <div class="location-buttons">
+          <button class="copy-btn" id="copyAddressBtn">주소 복사</button>
+          <a href="#" class="map-btn kakao-btn" id="kakaoMapBtn" target="_blank" rel="noopener">카카오맵</a>
+          <a href="#" class="map-btn naver-btn" id="naverMapBtn" target="_blank" rel="noopener">네이버지도</a>
+        </div>
+      </div>
+      <div class="location-map-container">
+        <img src="" alt="약도" class="location-map" id="locationMapImg">
+      </div>
+    </section>
+
+    <!-- ─── 다섯번째 섹션: 축의금 ─── -->
+    <section class="section section-account">
+      <h2 class="account-title">마음 전하실 곳</h2>
+      <p class="account-subtitle">참석이 어려우신 분들을 위해 비대면으로나마<br>마음을 전하실 수 있도록 안내드립니다.<br>보내주신 정성 소중히 간직하겠습니다.</p>
+
+      <div class="account-accordions">
+        <div class="account-accordion" id="groomAccordion">
+          <button class="accordion-header">
+            <span>신랑측 계좌번호</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content" id="groomAccountList"></div>
+        </div>
+        <div class="account-accordion" id="brideAccordion">
+          <button class="accordion-header">
+            <span>신부측 계좌번호</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-content" id="brideAccountList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 푸터 ─── -->
+    <footer class="footer">
+      <p class="footer-text" id="footerText"></p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

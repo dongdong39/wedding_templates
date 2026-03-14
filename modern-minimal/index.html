@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>모바일 청첩장</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="결혼식에 초대합니다">
+  <meta property="og:description" content="소중한 분들을 초대합니다">
+  <meta property="og:image" content="images/og/1.jpg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Pretendard CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ====== Curtain / Intro Overlay (toggled by CONFIG.useCurtain) ====== -->
+<div class="curtain-overlay" id="curtain-overlay" style="display:none;">
+  <div class="curtain-content">
+    <div class="curtain-names"></div>
+    <div class="curtain-date"></div>
+    <button class="curtain-btn" id="curtain-open-btn" type="button">초대장 열기</button>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <img class="hero-image" src="" alt="Wedding photo" loading="eager">
+    <div class="hero-overlay">
+      <div class="hero-names"></div>
+      <div class="hero-date"></div>
+      <div class="hero-venue"></div>
+    </div>
+    <div class="hero-scroll"></div>
+  </section>
+
+  <!-- ====== Invitation ====== -->
+  <section class="section invitation fade-in">
+    <div class="section-label">Invitation</div>
+    <div class="section-title">소중한 분들을 초대합니다</div>
+    <p class="invitation-message"></p>
+    <div class="section-divider"></div>
+    <div class="invitation-parents"></div>
+  </section>
+
+  <!-- ====== Countdown ====== -->
+  <section class="section countdown fade-in">
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-days">0</span>
+        <span class="countdown-unit">Days</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-hours">0</span>
+        <span class="countdown-unit">Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-mins">0</span>
+        <span class="countdown-unit">Min</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-secs">0</span>
+        <span class="countdown-unit">Sec</span>
+      </div>
+    </div>
+    <div class="countdown-dday"></div>
+    <div class="countdown-calendar-buttons">
+      <button class="btn-calendar" id="btn-gcal" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Google
+      </button>
+      <button class="btn-calendar" id="btn-ical" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Apple
+      </button>
+    </div>
+  </section>
+
+  <!-- ====== Our Story ====== -->
+  <section class="section story fade-in">
+    <div class="story-header">
+      <div class="section-label">Our Story</div>
+      <div class="section-title" id="story-title"></div>
+    </div>
+    <p class="story-content"></p>
+    <div class="story-images"></div>
+  </section>
+
+  <!-- ====== Gallery ====== -->
+  <section class="section gallery fade-in">
+    <div class="gallery-header">
+      <div class="section-label">Gallery</div>
+      <div class="section-title">우리의 순간들</div>
+    </div>
+    <div class="gallery-grid"></div>
+    <div class="gallery-more">
+      <button class="btn-gallery-more" type="button">더보기</button>
+    </div>
+  </section>
+
+  <!-- ====== Location ====== -->
+  <section class="section location fade-in">
+    <div class="location-header">
+      <div class="section-label">Location</div>
+      <div class="section-title">오시는 길</div>
+    </div>
+    <div class="location-info">
+      <div class="location-venue-name"></div>
+      <div class="location-venue-hall"></div>
+      <div class="location-address"></div>
+      <div class="location-tel"></div>
+    </div>
+    <div class="location-map-image">
+      <img src="" alt="약도" loading="lazy">
+    </div>
+    <div class="location-actions">
+      <button type="button" id="btn-copy-address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+        </svg>
+        주소 복사
+      </button>
+      <a href="#" id="link-kakao-map" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        카카오맵
+      </a>
+      <a href="#" id="link-naver-map" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        네이버지도
+      </a>
+    </div>
+  </section>
+
+  <!-- ====== Account ====== -->
+  <section class="section account fade-in">
+    <div class="account-header">
+      <div class="section-label">Account</div>
+      <div class="section-title">마음 전하실 곳</div>
+    </div>
+
+    <div class="account-group" id="account-groom">
+      <button class="account-group-toggle" type="button">
+        <span class="toggle-label">신랑측 계좌번호</span>
+        <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="account-list"></div>
+    </div>
+
+    <div class="account-group" id="account-bride">
+      <button class="account-group-toggle" type="button">
+        <span class="toggle-label">신부측 계좌번호</span>
+        <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="account-list"></div>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer class="footer">
+    <div class="footer-text">Wedding Invitation</div>
+  </footer>
+
+</div>
+
+<!-- ====== Photo Modal ====== -->
+<div class="modal-overlay">
+  <button class="modal-close" type="button" aria-label="닫기">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <button class="modal-nav modal-prev" type="button" aria-label="이전">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+  <button class="modal-nav modal-next" type="button" aria-label="다음">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <polyline points="9 6 15 12 9 18"/>
+    </svg>
+  </button>
+  <div class="modal-swipe-area">
+    <img class="modal-image" src="" alt="">
+  </div>
+  <div class="modal-counter"></div>
+</div>
+
+<!-- Scripts -->
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
