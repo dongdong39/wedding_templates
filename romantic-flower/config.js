@@ -83,7 +83,7 @@ const CONFIG = {
     ],
   },
 
-  // ── 공유 설정 ──
+  // ── 링크 공유 시 나타나는 문구 ──
   kakaoShare: {
     // Kakao Developers 앱키 (JavaScript 키)
     appKey: "",
